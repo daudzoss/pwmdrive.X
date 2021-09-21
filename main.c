@@ -18,18 +18,17 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
 {
   switch (parm) {
 
-  case FREQ_ADJUST_MODE:
+  case FREQ_ADJUST_MODE: // knob is frequency but parameter is time; reverse so
     new_value = 0xffff - new_value; // CW turn = higher frequency (lower period)
+
     *T = new_value >> 8;
-    TMR6_Stop();
-    TMR7_Stop();
+//    TMR6_Stop();
     TMR6_LoadPeriodRegister(*T);
-    TMR7_LoadPeriodRegister(*T);
-    TMR6_Start();
-    TMR7_Start();
+//    TMR6_Start();
     break;
     
-  case DUTY_ADJUST_MODE: // 8+16-14=10-bit right justified: uint8_t*uint16_t>>14
+  case DUTY_ADJUST_MODE: // uint8_t*uint16_t>>14: 8+16-14=10-bit right justified
+
     *tau = ((*T) * new_value) >> 14; // CW turn = higher duty cycle (higher tau)
     PWM6_LoadDutyValue(*tau);
     PWM7_LoadDutyValue(*tau);
@@ -40,6 +39,7 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
     return;
   }
 
+  // display binary representation of upper nybble on LED array
   LED5_LAT = (new_value & 0x8000) ? 1 : 0;
   LED4_LAT = (new_value & 0x4000) ? 1 : 0;
   LED3_LAT = (new_value & 0x2000) ? 1 : 0;
@@ -58,7 +58,7 @@ void main(void)
     SYSTEM_Initialize();
 
     // Disable the Global Interrupts
-    INTERRUPT_GlobalInterruptDisable();
+//    INTERRUPT_GlobalInterruptDisable();
 
     set_parameter(FREQ_ADJUST_MODE, 0x8000, (void*)0, &tmr_period); // mid-range
     set_parameter(DUTY_ADJUST_MODE, 0x8000, &tmr_toggle, &tmr_period); // 50%
