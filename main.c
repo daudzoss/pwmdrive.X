@@ -65,7 +65,7 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
     TMR6_LoadPeriodRegister(*T >> 8);
   }
   if (T && tau) {
-    uint16_t new_duty = ((uint32_t)(*tau)*(uint32_t)(1+*T)) >> 22; // uint16_t*uint16_t>>22:32-22=10
+    uint16_t new_duty = ((*tau)*(1+*T)) >> 22; // uint16_t*uint16_t>>22:32-22=10
 
     PWM6_LoadDutyValue(new_duty);
     PWM7_LoadDutyValue(new_duty);
@@ -80,17 +80,15 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
 
 void main(void)
 {
-    uint16_t tmr_period; // 8-bit TMR6 shared by positive PWM6 and negative PWM7
-    uint16_t tmr_toggle; // right-aligned 10-bit high time within 4*tmr_period+4
+    uint16_t tmr_period; // left-aligned 8-bit TMR6 shared between PWM6 and PWM7
+    uint16_t tmr_toggle;// left-aligned 10-bit high time within 4*(tmr_period+1)
 
-    uint8_t mode = NO_MODE_SELECTED; // turning knob won't set freq or duty yet
+    uint8_t mode = NO_MODE_SELECTED; // knob adjusts freq/duty after S1/S2 press
 
     // initialize the device
     SYSTEM_Initialize();
-
     set_current_limit(6, 0xff);
     set_current_limit(7, 0xff);
-
     set_parameter(FREQ_ADJUST_MODE, 0x8000, (void*)0, &tmr_period); // mid-range
     set_parameter(DUTY_ADJUST_MODE, 0x8000, &tmr_toggle, &tmr_period); // 50%
 
