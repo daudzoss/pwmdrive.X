@@ -28,28 +28,23 @@ uint16_t read_adc(uint8_t chan)
   return 0xffc0 - (uint16_t) ADCC_GetSingleConversion(chan);
 }
 
-void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
+void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
 {
   switch (parm) {
 
   case FREQ_ADJUST_MODE: // knob is frequency but parameter is time; reverse so
-    new_value = 0xffff - new_value; // CW turn = higher frequency (lower period)
 
-    if (T) {
-      *T = new_value >> 8;
-//      TMR6_Stop();
-      TMR6_LoadPeriodRegister(*T);
-//      TMR6_Start();
-    }
+    new_value = 0xffff - new_value;
+    if (T)
+      *T = new_value; // CW turn = higher frequency (lower period)
+
     break;
     
   case DUTY_ADJUST_MODE: // uint8_t*uint16_t>>14: 8+16-14=10-bit right justified
 
-    if (tau && T) {
-       *tau = ((*T) * new_value) >> 14; // CW turn = higher duty cycle (tau)
-       PWM6_LoadDutyValue(*tau);
-       PWM7_LoadDutyValue(*tau);
-    }
+    if (tau)
+      *tau = new_value; // CW turn = higher duty cycle (tau)
+
     break;
 
   case NO_MODE_SELECTED: // adjust the current limit downward first if no button
@@ -58,7 +53,16 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
     set_current_limit(6, new_value >> 8);
     set_current_limit(7, new_value >> 8);
 */
-    break;
+    return;
+  }
+
+  // duty cycle has to be recalculated every time period changes
+  if (T && tau) {
+    uint16_t new_duty = ((*T) * (*tau)) >> 14;
+
+    TMR6_LoadPeriodRegister(*T >> 8);
+    PWM6_LoadDutyValue(new_duty);
+    PWM7_LoadDutyValue(new_duty);
   }
 
   // display binary representation of upper nybble on LED array
