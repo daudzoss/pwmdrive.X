@@ -25,22 +25,22 @@ void set_current_limit(uint8_t pwm_chan, uint8_t dac_value)
 uint16_t read_adc(uint8_t chan)
 {
   // correct for the fact that knob fully left reads full scale, fully right 0:
-  return 0xffc0 - (uint16_t) ADCC_GetSingleConversion(chan);
+  return 0xffc1 - (uint16_t) ADCC_GetSingleConversion(chan); // 0x0001 to 0xffc1
 }
 
 void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
 {
   switch (parm) {
 
-  case FREQ_ADJUST_MODE: // knob is frequency but parameter is time; reverse so
+  case FREQ_ADJUST_MODE: // knob is frequency but parameter is time; invert knob
 
-    new_value = 0xffff - new_value;
+    new_value = (0xffffffff / new_value) >> 16; // 1=>0xffff to 0xfff1=>0x0001
     if (T)
       *T = new_value; // CW turn = higher frequency (lower period)
 
     break;
     
-  case DUTY_ADJUST_MODE: // uint8_t*uint16_t>>14: 8+16-14=10-bit right justified
+  case DUTY_ADJUST_MODE:
 
     if (tau)
       *tau = new_value; // CW turn = higher duty cycle (tau)
@@ -58,7 +58,7 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
 
   // duty cycle has to be recalculated every time period changes
   if (T && tau) {
-    uint16_t new_duty = ((*T) * (*tau)) >> 14;
+    uint16_t new_duty = ((*T) * (*tau)) >> 22; // uint16_t*uint16_t>>22: 32-22=10
 
     TMR6_LoadPeriodRegister(*T >> 8);
     PWM6_LoadDutyValue(new_duty);
