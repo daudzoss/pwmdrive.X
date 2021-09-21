@@ -22,15 +22,10 @@ void set_current_limit(uint8_t pwm_chan, uint8_t dac_value)
   CLIK2CS_N_LAT = 1;
 }
 
-void read_adc(uint16_t* convertedValue)
+uint16_t read_adc(uint8_t chan)
 {
-  /*
-  ADCC_StartConversion(TRIMPOT);
-  while (!ADCC_IsConversionDone())
-    ;
-  *convertedValue = (uint16_t) ADCC_GetConversionResult(); // ADFRM0=0 (left)
-  */
-  *convertedValue = (uint16_t) ADCC_GetSingleConversion(TRIMPOT); // ADFRM0=left
+  // correct for the fact that knob fully left reads full scale, fully right 0:
+  return 0xffc0 - (uint16_t) ADCC_GetSingleConversion(chan);
 }
 
 void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
@@ -98,7 +93,7 @@ void main(void)
       else if (!S2PRESS_N_PORT) // S2 pressed
 	mode = DUTY_ADJUST_MODE;
 	  
-      read_adc(&knob_pos);
+      knob_pos = read_adc(TRIMPOT);
       set_parameter(mode, knob_pos, &tmr_toggle, &tmr_period);
     }
 }
