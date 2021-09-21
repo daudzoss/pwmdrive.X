@@ -5,12 +5,32 @@
 #define FREQ_ADJUST_MODE (1)
 #define DUTY_ADJUST_MODE (2)
 
+void set_current_limit(uint8_t pwm_chan, uint8_t dac_value)
+{
+  if (pwm_chan == 6) { // low channel (PWM6 uses RA1, labeled "1")
+    CLIK1CS_N_LAT = 0;
+    CLIK2CS_N_LAT = 1;
+  } else if (pwm_chan == 7) { // even channel (PWM7 uses RA2, labeled "2")
+    CLIK1CS_N_LAT = 1;
+    CLIK2CS_N_LAT = 0;
+  }
+
+  SPI1_WriteByte(dac_value);
+    
+  // de-assert both channels
+  CLIK1CS_N_LAT = 1;
+  CLIK2CS_N_LAT = 1;
+}
+
 void read_adc(uint16_t* convertedValue)
 {
+  /*
   ADCC_StartConversion(TRIMPOT);
   while (!ADCC_IsConversionDone())
     ;
   *convertedValue = (uint16_t) ADCC_GetConversionResult(); // ADFRM0=0 (left)
+  */
+  *convertedValue = (uint16_t) ADCC_GetSingleConversion(TRIMPOT); // ADFRM0=left
 }
 
 void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
@@ -20,21 +40,29 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
   case FREQ_ADJUST_MODE: // knob is frequency but parameter is time; reverse so
     new_value = 0xffff - new_value; // CW turn = higher frequency (lower period)
 
-    *T = new_value >> 8;
-//    TMR6_Stop();
-    TMR6_LoadPeriodRegister(*T);
-//    TMR6_Start();
+    if (T) {
+      *T = new_value >> 8;
+//      TMR6_Stop();
+      TMR6_LoadPeriodRegister(*T);
+//      TMR6_Start();
+    }
     break;
     
   case DUTY_ADJUST_MODE: // uint8_t*uint16_t>>14: 8+16-14=10-bit right justified
 
-    *tau = ((*T) * new_value) >> 14; // CW turn = higher duty cycle (higher tau)
-    PWM6_LoadDutyValue(*tau);
-    PWM7_LoadDutyValue(*tau);
+    if (tau && T) {
+       *tau = ((*T) * new_value) >> 14; // CW turn = higher duty cycle (tau)
+       PWM6_LoadDutyValue(*tau);
+       PWM7_LoadDutyValue(*tau);
+    }
     break;
 
-  case NO_MODE_SELECTED:
+  case NO_MODE_SELECTED: // adjust the current limit downward first if no button
   default:
+/*
+    set_current_limit(6, new_value >> 8);
+    set_current_limit(7, new_value >> 8);
+*/
     break;
   }
 
@@ -43,10 +71,6 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
   LED4_LAT = (new_value & 0x4000) ? 1 : 0;
   LED3_LAT = (new_value & 0x2000) ? 1 : 0;
   LED2_LAT = (new_value & 0x1000) ? 1 : 0;
-}
-
-void set_current_limit(uint8_t pwm_chan, uint8_t idac_value)
-{
 }
 
 void main(void)
@@ -59,8 +83,8 @@ void main(void)
     // initialize the device
     SYSTEM_Initialize();
 
-    set_current_limit(6, 0xffff);
-    set_current_limit(7, 0xffff);
+    set_current_limit(6, 0xff);
+    set_current_limit(7, 0xff);
 
     set_parameter(FREQ_ADJUST_MODE, 0x8000, (void*)0, &tmr_period); // mid-range
     set_parameter(DUTY_ADJUST_MODE, 0x8000, &tmr_toggle, &tmr_period); // 50%
