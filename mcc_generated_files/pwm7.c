@@ -61,8 +61,8 @@
     // PWM7POL active_lo; PWM7EN enabled; 
     PWM7CON = 0x90;   
 
-    // DC 124; 
-    PWM7DCH = 0x7C;   
+    // DC 127; 
+    PWM7DCH = 0x7F;   
 
     // DC 3; 
     PWM7DCL = 0xC0;   

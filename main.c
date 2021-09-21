@@ -35,6 +35,10 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
   case FREQ_ADJUST_MODE: // knob is frequency but parameter is time; flip knob
 
     new_value = 0xffff - new_value; // 0=>0xffff to 0xffc0=>0x003f
+    if (new_value < 0x1000)
+      new_value = 0x1000; // only really useful down to about 5% period
+    else if (new_value > 0xff00)
+      new_value = 0xff00; // and up to about 99% period
     if (T)
       *T = new_value; // CW turn = higher frequency (lower period)
 
@@ -76,7 +80,7 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
 
 void main(void)
 {
-    uint8_t tmr_period; // 8-bit TMR6 shared by positive PWM6 and negative PWM7
+    uint16_t tmr_period; // 8-bit TMR6 shared by positive PWM6 and negative PWM7
     uint16_t tmr_toggle; // right-aligned 10-bit high time within 4*tmr_period+4
 
     uint8_t mode = NO_MODE_SELECTED; // turning knob won't set freq or duty yet
