@@ -45,6 +45,10 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
   LED2_LAT = (new_value & 0x1000) ? 1 : 0;
 }
 
+void set_current_limit(uint8_t pwm_chan, uint8_t idac_value)
+{
+}
+
 void main(void)
 {
     uint8_t tmr_period; // 8-bit TMR6 shared by positive PWM6 and negative PWM7
@@ -55,8 +59,8 @@ void main(void)
     // initialize the device
     SYSTEM_Initialize();
 
-    // Disable the Global Interrupts
-//    INTERRUPT_GlobalInterruptDisable();
+    set_current_limit(6, 0xffff);
+    set_current_limit(7, 0xffff);
 
     set_parameter(FREQ_ADJUST_MODE, 0x8000, (void*)0, &tmr_period); // mid-range
     set_parameter(DUTY_ADJUST_MODE, 0x8000, &tmr_toggle, &tmr_period); // 50%

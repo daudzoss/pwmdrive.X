@@ -1228,7 +1228,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="ADCC" registerAlias="ADCON0"/>
-         <value>196</value>
+         <value>192</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="ADCC" registerAlias="ADCON1"/>
@@ -1328,7 +1328,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="ADCC" registerAlias="ADCON0" settingAlias="ADFM"/>
-         <value>right</value>
+         <value>left</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="ADCC" registerAlias="ADCON0" settingAlias="ADON"/>
@@ -3255,10 +3255,6 @@
          <value>%DESELECT%</value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="CWG1PPS%aux2"/>
-         <value>%DESELECT%</value>
-      </entry>
-      <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RA0"/>
          <value>TRIMPOT</value>
       </entry>
@@ -3575,11 +3571,7 @@
          <value>disabled</value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="T2AINPPS%aux1"/>
-         <value>%DESELECT%</value>
-      </entry>
-      <entry>
-         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="T6AINPPS%aux3"/>
+         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="T6AINPPS%aux1"/>
          <value>%DESELECT%</value>
       </entry>
       <entry>
@@ -9969,40 +9961,40 @@
          <hash>59d7b47ae3026834ead9977d637b313c577916ec87661527ed56890e86498aa9</hash>
       </entry>
       <entry>
-         <file>main.c</file>
-         <hash>787a35814375cf30f59a032a2c21e9dfe772d53faccd273d9ab03cee49cacdd4</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\pwm7.h</file>
          <hash>2747027abe1a264d45f43e3a07046f12a3581bc28583fdd941e51a5fade03341</hash>
+      </entry>
+      <entry>
+         <file>main.c</file>
+         <hash>787a35814375cf30f59a032a2c21e9dfe772d53faccd273d9ab03cee49cacdd4</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\device_config.c</file>
          <hash>4fab2fbe0ee14a72c8c8c68cf03476030f44b66414aae3139e0ac8c4b5c28c13</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\pin_manager.h</file>
-         <hash>fc0b2f037fb9cc827118a480b69c67c2a08f9ea41febe8fcb5fe6d9dbfc1c815</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\spi1.h</file>
          <hash>201a48db4ef025083e79f90f0f1b0854b9f7fa37d081edc85d02777040f3580c</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\pin_manager.h</file>
+         <hash>fc0b2f037fb9cc827118a480b69c67c2a08f9ea41febe8fcb5fe6d9dbfc1c815</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\adcc.h</file>
          <hash>79a7cdb6d289a737cc490102bd48155bc30436a0f810d01354d26d6bccce4954</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\pin_manager.c</file>
-         <hash>0cf5819b3a819d7b202eae980208faa74095ac92617b42f26998e0d0b53c4ae9</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\spi1.c</file>
          <hash>45e6324a5131ac90ddc70b16e683609398e9bdcc056b5f0f05232a24a444ed2c</hash>
       </entry>
       <entry>
+         <file>mcc_generated_files\pin_manager.c</file>
+         <hash>0cf5819b3a819d7b202eae980208faa74095ac92617b42f26998e0d0b53c4ae9</hash>
+      </entry>
+      <entry>
          <file>mcc_generated_files\adcc.c</file>
-         <hash>2e724a38b34b92602178f106fae09746fbb7bfea5bc54ae329404a6f6004d090</hash>
+         <hash>9ac6ffce336af89f021421249c77e2c6213c3c5c7ff9565c82e7a41a94fe24e4</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pwm6.c</file>
