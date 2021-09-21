@@ -19,7 +19,8 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
   switch (parm) {
 
   case FREQ_ADJUST_MODE:
-    *T = (0xffff - new_value) >> 8; // CW turn = higher freq. (lower T)
+    new_value = 0xffff - new_value; // CW turn = higher frequency (lower period)
+    *T = new_value >> 8;
     TMR6_Stop();
     TMR7_Stop();
     TMR6_LoadPeriodRegister(*T);
@@ -28,26 +29,30 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
     TMR7_Start();
     break;
     
-  case DUTY_ADJUST_MODE:
-    *tau = ((uint32_t)(*T) * (uint32_t)new_value) >> 8; // CW turn = higher tau
+  case DUTY_ADJUST_MODE: // 8+16-14=10-bit right justified: uint8_t*uint16_t>>14
+    *tau = ((*T) * new_value) >> 14; // CW turn = higher duty cycle (higher tau)
     PWM6_LoadDutyValue(*tau);
     PWM7_LoadDutyValue(*tau);
     break;
 
   case NO_MODE_SELECTED:
   default:
-    break;
+    return;
   }
+
+  LED5_LAT = (new_value & 0x8000) ? 1 : 0;
+  LED4_LAT = (new_value & 0x4000) ? 1 : 0;
+  LED3_LAT = (new_value & 0x2000) ? 1 : 0;
+  LED2_LAT = (new_value & 0x1000) ? 1 : 0;
   return;
 }
 
-/*
-                         Main application
- */
 void main(void)
 {
-    uint8_t tmr_period; // 8-bit timer counter
+    uint8_t tmr_period; // 8-bit counter shared by positive PWM6, negative PWM7
     uint16_t tmr_toggle; // left-aligned 10-bit timestamp within 4*tmr_period+4
+
+    uint8_t mode = NO_MODE_SELECTED; // turning knob won't set freq or duty yet
 
     // initialize the device
     SYSTEM_Initialize();
@@ -57,8 +62,6 @@ void main(void)
 
     set_parameter(FREQ_ADJUST_MODE, 0x8000, (void*)0, &tmr_period); // mid-range
     set_parameter(DUTY_ADJUST_MODE, 0x8000, &tmr_toggle, &tmr_period); // 50%
-
-    uint8_t mode = NO_MODE_SELECTED; // turning knob won't set freq or duty yet
 
     while (1) {
       uint16_t knob_pos;
