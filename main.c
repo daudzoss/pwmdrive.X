@@ -7,11 +7,10 @@
 
 void read_adc(uint16_t* convertedValue)
 {
-//  ADCC_StartConversion(TRIMPOT);
-//  while (!ADCC_IsConversionDone())
-//    ;
-
-  *convertedValue = (uint16_t) ADCC_GetConversionResult();
+  ADCC_StartConversion(TRIMPOT);
+  while (!ADCC_IsConversionDone())
+    ;
+  *convertedValue = (uint16_t) ADCC_GetConversionResult(); // ADFRM0=0 (left)
 }
 
 void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
@@ -36,7 +35,7 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
 
   case NO_MODE_SELECTED:
   default:
-    return;
+    break;
   }
 
   // display binary representation of upper nybble on LED array
@@ -44,13 +43,12 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint8_t* T)
   LED4_LAT = (new_value & 0x4000) ? 1 : 0;
   LED3_LAT = (new_value & 0x2000) ? 1 : 0;
   LED2_LAT = (new_value & 0x1000) ? 1 : 0;
-  return;
 }
 
 void main(void)
 {
-    uint8_t tmr_period; // 8-bit counter shared by positive PWM6, negative PWM7
-    uint16_t tmr_toggle; // left-aligned 10-bit timestamp within 4*tmr_period+4
+    uint8_t tmr_period; // 8-bit TMR6 shared by positive PWM6 and negative PWM7
+    uint16_t tmr_toggle; // right-aligned 10-bit high time within 4*tmr_period+4
 
     uint8_t mode = NO_MODE_SELECTED; // turning knob won't set freq or duty yet
 
