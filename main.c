@@ -5,26 +5,6 @@
 #define FREQ_ADJUST_MODE (1)
 #define DUTY_ADJUST_MODE (2)
 
-void set_current_limit(uint8_t pwm_chan, uint8_t dac_value)
-{
-  if (pwm_chan == 6) { // low channel (PWM6 uses RA1, labeled "1")
-    CLIK1CS_N_LAT = 0;
-    CLIK2CS_N_LAT = 1;
-  } else if (pwm_chan == 7) { // even channel (PWM7 uses RA2, labeled "2")
-    CLIK1CS_N_LAT = 1;
-    CLIK2CS_N_LAT = 0;
-  }
-
-  SPI1_WriteByte(dac_value);
-    
-  // insert 1us delay because the WriteByte() will return immediately
-  __delay_us(1);
-
-  // de-assert both channels
-  CLIK1CS_N_LAT = 1;
-  CLIK2CS_N_LAT = 1;
-}
-
 uint16_t read_adc(uint8_t chan)
 {
   // correct for the fact that knob fully left reads full scale, fully right 0:
@@ -40,10 +20,12 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
   case FREQ_ADJUST_MODE: // knob is frequency but parameter is time; flip knob
 
     new_value = 0xffff - new_value; // 0=>0xffff to 0xffc0=>0x003f
+
     if (new_value < 0x1000)
       new_value = 0x1000; // only really useful down to about 5% period
     else if (new_value > 0xff00)
       new_value = 0xff00; // and up to about 99% period
+
     if (T) {
       if (*T == new_value)
 	return; // no change to ADC value, so no action needed
@@ -64,25 +46,12 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
 
     break;
 
-  case NO_MODE_SELECTED: // adjust the current limit first if no button
+  case NO_MODE_SELECTED:
   default:
 
-    if (new_value >> 8 == old_limit)
-      return;
-    old_limit = new_value >> 8;    
-    set_current_limit(6, old_limit); // CW turn = higher current limit
-    set_current_limit(7, old_limit);
-
-    new_value = 0xffff - new_value;
-    if (new_value < 0x4000)
-      new_value = 0x8000;
-    else if (new_value < 0x8000)
-      new_value = 0xc000;
-    else if (new_value < 0xc000)
-      new_value = 0xe000;
-    else
-      new_value = 0xf000;
-    break;
+    PWM6_LoadDutyValue(0);
+    PWM7_LoadDutyValue(0);
+    return; // force both to 0% duty cycle until a button is pressed
   }
 
   
@@ -105,18 +74,12 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
 
 void main(void)
 {
-    uint16_t tmr_period; // left-aligned 8-bit TMR6 shared between PWM6 and PWM7
-    uint16_t tmr_toggle;// left-aligned 10-bit high time within 4*(tmr_period+1)
-
     uint8_t mode = NO_MODE_SELECTED; // knob adjusts freq/duty after S1/S2 press
+    uint16_t tmr_period = 0x0000; // left-aligned 8-bit TMR6 PWM6 and PWM7 share
+    uint16_t tmr_toggle = 0x8000; // left-aligned 10-bit high time <4*tmr_period
 
     // initialize the device
     SYSTEM_Initialize();
-    SPI1_Open(SPI1_DEFAULT);
-    set_current_limit(6, 0xff);
-    set_current_limit(7, 0xff);
-    set_parameter(FREQ_ADJUST_MODE, 0x8000, (void*)0, &tmr_period); // mid-range
-    set_parameter(DUTY_ADJUST_MODE, 0x8000, &tmr_toggle, &tmr_period); // 50%
 
     while (1) {
       uint16_t knob_pos;

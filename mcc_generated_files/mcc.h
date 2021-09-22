@@ -52,7 +52,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <conio.h>
-#include "spi1.h"
 #include "adcc.h"
 #include "tmr6.h"
 #include "pwm6.h"

@@ -50,7 +50,6 @@
 void SYSTEM_Initialize(void)
 {
     PMD_Initialize();
-    SPI1_Initialize();
     PIN_MANAGER_Initialize();
     OSCILLATOR_Initialize();
     PWM6_Initialize();
