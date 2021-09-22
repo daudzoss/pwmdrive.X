@@ -17,6 +17,9 @@ void set_current_limit(uint8_t pwm_chan, uint8_t dac_value)
 
   SPI1_WriteByte(dac_value);
     
+  // insert 1us delay because the WriteByte() will return immediately
+  __delay_us(1);
+
   // de-assert both channels
   CLIK1CS_N_LAT = 1;
   CLIK2CS_N_LAT = 1;
@@ -109,6 +112,7 @@ void main(void)
 
     // initialize the device
     SYSTEM_Initialize();
+    SPI1_Open(SPI1_DEFAULT);
     set_current_limit(6, 0xff);
     set_current_limit(7, 0xff);
     set_parameter(FREQ_ADJUST_MODE, 0x8000, (void*)0, &tmr_period); // mid-range
