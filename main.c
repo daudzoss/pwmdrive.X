@@ -51,13 +51,22 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
 
     break;
 
-  case NO_MODE_SELECTED: // adjust the current limit downward first if no button
+  case NO_MODE_SELECTED: // adjust the current limit first if no button
   default:
 /*
     set_current_limit(6, new_value >> 8);
     set_current_limit(7, new_value >> 8);
 */
-    return;
+    new_value = 0xffff - new_value;
+    if (new_value < 0x4000)
+      new_value = 0x8000;
+    else if (new_value < 0x8000)
+      new_value = 0xc000;
+    else if (new_value < 0xc000)
+      new_value = 0xe000;
+    else
+      new_value = 0xf000;
+    break;
   }
 
   // duty cycle has to be recalculated every time period changes
