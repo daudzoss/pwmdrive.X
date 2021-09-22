@@ -53,10 +53,10 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
 
   case NO_MODE_SELECTED: // adjust the current limit first if no button
   default:
-/*
-    set_current_limit(6, new_value >> 8);
+
+    set_current_limit(6, new_value >> 8); // CW turn = higher current limit
     set_current_limit(7, new_value >> 8);
-*/
+
     new_value = 0xffff - new_value;
     if (new_value < 0x4000)
       new_value = 0x8000;
@@ -74,7 +74,7 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
     TMR6_LoadPeriodRegister(*T >> 8);
   }
   if (T && tau) {
-    uint16_t new_duty = ((*tau)*(1+*T)) >> 22; // uint16_t*uint16_t>>22:32-22=10
+    uint16_t new_duty = ((uint32_t)(*tau) * (uint32_t)(1+*T)) >> 22; // 32-22=10
 
     PWM6_LoadDutyValue(new_duty);
     PWM7_LoadDutyValue(new_duty);
