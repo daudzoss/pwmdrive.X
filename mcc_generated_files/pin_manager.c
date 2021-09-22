@@ -77,7 +77,7 @@ void PIN_MANAGER_Initialize(void)
     */
     ANSELD = 0xF7;
     ANSELC = 0xDF;
-    ANSELB = 0xE5;
+    ANSELB = 0xE4;
     ANSELE = 0x07;
     ANSELA = 0x01;
 
@@ -129,7 +129,7 @@ void PIN_MANAGER_Initialize(void)
     RB3PPS = 0x15;   //RB3->MSSP1:SDO1;    
     RA1PPS = 0x0E;   //RA1->PWM6:PWM6OUT;    
     RA2PPS = 0x0F;   //RA2->PWM7:PWM7OUT;    
-    SSP1DATPPS = 0x0B;   //RB3->MSSP1:SDI1;    
+    SSP1DATPPS = 0x08;   //RB0->MSSP1:SDI1;    
 }
   
 void PIN_MANAGER_IOC(void)

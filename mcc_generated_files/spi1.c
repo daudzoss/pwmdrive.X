@@ -63,7 +63,7 @@ void SPI1_Initialize(void)
 {
     //Setup PPS Pins
     SSP1CLKPPS = 9;
-    SSP1DATPPS = 11;
+    SSP1DATPPS = 8;
     RB1PPS    = 20;
     RB3PPS    = 21;
     //SPI setup

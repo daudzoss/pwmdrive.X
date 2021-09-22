@@ -2968,7 +2968,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM6" name="ccpr"/>
-         <value>511</value>
+         <value>255</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM6" name="clockFreq"/>
@@ -2988,11 +2988,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM6" name="pwmFreq"/>
-         <value>3906.250</value>
+         <value>7812.500</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM6" name="pwmPeriod"/>
-         <value>2.56E-4</value>
+         <value>1.28E-4</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM6" name="pwmPinHiderKey"/>
@@ -3000,7 +3000,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM6" name="pwmResolution"/>
-         <value>10</value>
+         <value>9</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM6" name="pwmTmrSelect"/>
@@ -3008,7 +3008,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM6" name="pwmdc"/>
-         <value>511</value>
+         <value>255</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM6" name="timerselpresence"/>
@@ -3020,11 +3020,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM6" name="tmr2present"/>
-         <value>3906.25</value>
+         <value>7812.5</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM6" name="tmr2prreg"/>
-         <value>255</value>
+         <value>127</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="PWM6" registerAlias="CCPTMRS1" settingAlias="CTSEL" alias="PWM6timer2"/>
@@ -3072,7 +3072,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="PWM6" registerAlias="PWMDCH"/>
-         <value>127</value>
+         <value>63</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="PWM6" registerAlias="PWMDCL"/>
@@ -3096,7 +3096,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="PWM6" registerAlias="PWMDCH" settingAlias="PWMDCH"/>
-         <value>127</value>
+         <value>63</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="PWM6" registerAlias="PWMDCL" settingAlias="PWMDCL"/>
@@ -3116,7 +3116,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM7" name="ccpr"/>
-         <value>511</value>
+         <value>255</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM7" name="clockFreq"/>
@@ -3136,11 +3136,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM7" name="pwmFreq"/>
-         <value>3906.250</value>
+         <value>7812.500</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM7" name="pwmPeriod"/>
-         <value>2.56E-4</value>
+         <value>1.28E-4</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM7" name="pwmPinHiderKey"/>
@@ -3148,7 +3148,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM7" name="pwmResolution"/>
-         <value>10</value>
+         <value>9</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM7" name="pwmTmrSelect"/>
@@ -3156,7 +3156,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM7" name="pwmdc"/>
-         <value>511</value>
+         <value>255</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM7" name="timerselpresence"/>
@@ -3168,11 +3168,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM7" name="tmr2present"/>
-         <value>3906.25</value>
+         <value>7812.5</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="PWM7" name="tmr2prreg"/>
-         <value>255</value>
+         <value>127</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="PWM7" registerAlias="CCPTMRS1" settingAlias="CTSEL" alias="PWM7timer2"/>
@@ -3220,7 +3220,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="PWM7" registerAlias="PWMDCH"/>
-         <value>127</value>
+         <value>63</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="PWM7" registerAlias="PWMDCL"/>
@@ -3244,14 +3244,14 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="PWM7" registerAlias="PWMDCH" settingAlias="PWMDCH"/>
-         <value>127</value>
+         <value>63</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="PWM7" registerAlias="PWMDCL" settingAlias="PWMDCL"/>
          <value>3</value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="ADCACTPPS%aux1"/>
+         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="ADCACTPPS%aux0"/>
          <value>%DESELECT%</value>
       </entry>
       <entry>
@@ -3564,14 +3564,14 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="SDA1%Bidirectional"/>
-         <value>RB3</value>
+         <value>RB0</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="SDA1%isActiveBidirectional"/>
          <value>disabled</value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="T6AINPPS%aux0"/>
+         <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="T6AINPPS%aux1"/>
          <value>%DESELECT%</value>
       </entry>
       <entry>
@@ -3620,7 +3620,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="anselUserSetRB3"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="anselUserSetRB4"/>
@@ -4200,7 +4200,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="trisUserSetRB4"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="trisUserSetRB5"/>
@@ -6876,7 +6876,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="ANSELB"/>
-         <value>229</value>
+         <value>228</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="ANSELC"/>
@@ -7248,7 +7248,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="SSP1DATPPS"/>
-         <value>11</value>
+         <value>8</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="SSP1SSPPS"/>
@@ -7388,7 +7388,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSELB" settingAlias="ANSB0"/>
-         <value>analog</value>
+         <value>digital</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSELB" settingAlias="ANSB1"/>
@@ -8600,7 +8600,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="SSP1DATPPS" settingAlias="SSP1DATPPS"/>
-         <value>11</value>
+         <value>8</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="SSP1SSPPS" settingAlias="SSP1SSPPS"/>
@@ -9424,7 +9424,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR6" name="TimerPeriodkey"/>
-         <value>3906.25</value>
+         <value>7812.5</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR6" name="clockFreq"/>
@@ -9460,7 +9460,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR6" name="periodValue"/>
-         <value>255</value>
+         <value>127</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR6" name="pinEnable"/>
@@ -9472,11 +9472,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR6" name="timerPeriod"/>
-         <value>0.001</value>
+         <value>0.000128</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR6" name="timerPeriodActual"/>
-         <value>0.000256</value>
+         <value>0.000128</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="TMR6" name="timerPeriodMax"/>
@@ -9840,7 +9840,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="TMR6" registerAlias="TPR"/>
-         <value>255</value>
+         <value>127</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="TMR6" registerAlias="TRST"/>
@@ -9896,7 +9896,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="TMR6" registerAlias="TPR" settingAlias="PR"/>
-         <value>255</value>
+         <value>127</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="TMR6" registerAlias="TRST" settingAlias="TRSEL"/>
@@ -9954,43 +9954,43 @@
       </entry>
       <entry>
          <file>mcc_generated_files\tmr6.c</file>
-         <hash>a11445764553aeab73078c4af3746cdd46b250c3aa83f1353039c862ce842a8e</hash>
+         <hash>3570084ccaa90047fff0367df0b1f99f09dfb05f82603b1917f57ff50ee2689e</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pwm6.h</file>
-         <hash>755649e68cffece3cf503b9a1ef3b56c6a964dbde16eac89cf186178067666e6</hash>
+         <hash>5fffacb01613a3baffc7e52b5caa8c1ac39ea2f0fdf7831f132249c219748232</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\pwm7.h</file>
+         <hash>e976706ed949bd9c1b5827ad8ac8848fe6752e00c285bbfbe73c30515119e3dc</hash>
       </entry>
       <entry>
          <file>main.c</file>
          <hash>787a35814375cf30f59a032a2c21e9dfe772d53faccd273d9ab03cee49cacdd4</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\pwm7.h</file>
-         <hash>d1a6729091f6c73bd413ac9bef2536812945f8b5b7876c08804126070a104c59</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\device_config.c</file>
          <hash>4fab2fbe0ee14a72c8c8c68cf03476030f44b66414aae3139e0ac8c4b5c28c13</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\spi1.h</file>
-         <hash>201a48db4ef025083e79f90f0f1b0854b9f7fa37d081edc85d02777040f3580c</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\pin_manager.h</file>
-         <hash>fc0b2f037fb9cc827118a480b69c67c2a08f9ea41febe8fcb5fe6d9dbfc1c815</hash>
+         <hash>f6a70b74c1802fdf09cf64377825f0bbfb54b1f15387a3ed3c8c41ee898beeb9</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\adcc.h</file>
          <hash>79a7cdb6d289a737cc490102bd48155bc30436a0f810d01354d26d6bccce4954</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\spi1.c</file>
-         <hash>c20a3f70802d66f920f17519e7c3132c6ea701c93d84ba43be25ee4d86c66a5b</hash>
+         <file>mcc_generated_files\spi1.h</file>
+         <hash>201a48db4ef025083e79f90f0f1b0854b9f7fa37d081edc85d02777040f3580c</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pin_manager.c</file>
-         <hash>3578fa0a5586fd7c1ac0c4b6d4ff1d394d474c610c22f85930c80693dffd0d53</hash>
+         <hash>b87d91580a9e73dd55302de007b4c6dcf6a58b171b09b44100c3d76917e70649</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\spi1.c</file>
+         <hash>e47941e8fc476012d85db9bc8790fb342869efd2fa4cec2f8af38c3fb5d38e7e</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\adcc.c</file>
@@ -9998,11 +9998,11 @@
       </entry>
       <entry>
          <file>mcc_generated_files\pwm6.c</file>
-         <hash>81d01ee5041fc9978e21934f47bfab2a11f1ce1578bc8e28c9106c044fc26593</hash>
+         <hash>8787ffc530ad767d9e786c2410db66d12d83c35226facc8cc7fdcc99d5c58c15</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pwm7.c</file>
-         <hash>0ea05312d4c5ec38f27ba8c54fd64a09bbb315d2838b8cfce9153e46f7de166e</hash>
+         <hash>4ed7ea8dcfecc98cca615cc8cf106e9386c421b9c010986bba46683508bb38e3</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\mcc.c</file>
