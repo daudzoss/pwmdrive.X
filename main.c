@@ -30,6 +30,8 @@ uint16_t read_adc(uint8_t chan)
 
 void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
 {
+  static uint8_t old_limit = 0xff;
+
   switch (parm) {
 
   case FREQ_ADJUST_MODE: // knob is frequency but parameter is time; flip knob
@@ -39,23 +41,34 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
       new_value = 0x1000; // only really useful down to about 5% period
     else if (new_value > 0xff00)
       new_value = 0xff00; // and up to about 99% period
-    if (T)
-      *T = new_value; // CW turn = higher frequency (lower period)
+    if (T) {
+      if (*T == new_value)
+	return; // no change to ADC value, so no action needed
+      else
+	*T = new_value; // CW turn = higher frequency (lower period)
+    }
 
     break;
     
   case DUTY_ADJUST_MODE:
 
-    if (tau)
-      *tau = new_value; // CW turn = higher duty cycle (tau)
+    if (tau) {
+      if (*tau == new_value)
+	return; // no change to ADC value, so no action needed
+      else
+	*tau = new_value; // CW turn = higher duty cycle (tau)
+    }
 
     break;
 
   case NO_MODE_SELECTED: // adjust the current limit first if no button
   default:
 
-    set_current_limit(6, new_value >> 8); // CW turn = higher current limit
-    set_current_limit(7, new_value >> 8);
+    if (new_value >> 8 == old_limit)
+      return;
+    old_limit = new_value >> 8;    
+    set_current_limit(6, old_limit); // CW turn = higher current limit
+    set_current_limit(7, old_limit);
 
     new_value = 0xffff - new_value;
     if (new_value < 0x4000)
@@ -69,11 +82,11 @@ void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
     break;
   }
 
-  // duty cycle has to be recalculated every time period changes
+  
   if (T) {
     TMR6_LoadPeriodRegister(*T >> 8);
   }
-  if (T && tau) {
+  if (T && tau) { // duty cycle has to be recalculated every time period changes
     uint16_t new_duty = ((uint32_t)(*tau) * (uint32_t)(1+*T)) >> 22; // 32-22=10
 
     PWM6_LoadDutyValue(new_duty);
