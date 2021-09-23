@@ -13,8 +13,6 @@ uint16_t read_adc(uint8_t chan)
 
 void set_parameter(uint8_t parm, uint16_t new_value, uint16_t* tau, uint16_t* T)
 {
-  static uint8_t old_limit = 0xff;
-
   switch (parm) {
 
   case FREQ_ADJUST_MODE: // knob is frequency but parameter is time; flip knob
